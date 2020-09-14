@@ -14,7 +14,7 @@ pipeline {
             }
             stage('Terraform dev-workspace') {
                 steps {
-                    sh label: '', script: 'terraform workspace new dev'
+                    sh label: '', returnStatus: true, script: 'terraform workspace new dev'
 
                 }
             }
