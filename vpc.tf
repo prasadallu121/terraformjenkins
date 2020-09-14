@@ -1,3 +1,4 @@
+
 data "aws_availability_zones" "azs" {
   state = "available"
 }
@@ -25,4 +26,4 @@ resource "aws_subnet" "red_pub_sn" {
     Name = "Red-Public-SN - 00${count.index + 1}"
     Environment = "${terraform.workspace}"
   }
-}
+  }
