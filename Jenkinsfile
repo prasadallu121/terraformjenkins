@@ -14,7 +14,7 @@ pipeline {
             }
             stage('Terraform dev-workspace') {
                 steps {
-                    sh label: '', script: 'terraform workspace new dev'
+                    sh label: '', returnStatus: true, script: 'terraform workspace new dev'
 
                 }
             }
@@ -24,5 +24,32 @@ pipeline {
 
                 }
             }
+             stage('Terraform prod-workspace') {
+                steps {
+                    sh label: '', returnStatus: true, script: 'terraform workspace new prod'
+
+                }
+            }
+            stage('Terraform prod-workspace-apply') {
+                steps {
+                    sh label: '', script: 'terraform apply -var-file=prod.tfvars --auto-approve'
+
+                }
+            }
+             stage('Creating-S3-Bucker') {
+                steps {
+                    script{
+                        CreateS3Bucket('prasadallu0607')
+                    }
+                                    }
+            }
+
+
+                }
+            }
         }
     }
+
+def CreateS3Bucket(bucketName) {
+sh label: '', returnStatus: true, script: "aws s3 mb ${bucketName} --region=us-east-1"
+}
