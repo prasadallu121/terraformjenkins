@@ -48,5 +48,5 @@ pipeline {
     }
 
 def CreateS3Bucket(bucketName) {
-sh returnStatus: true, script: "aws s3 mb ${bucketName} --region=us-east-1"
+    sh returnStatus: true, script: "aws s3 mb s3://${bucketName} --region us-west-1"
 }
