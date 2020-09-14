@@ -18,9 +18,9 @@ pipeline {
 
                 }
             }
-            stage('Terraform dev-workspace-apply') {
+            stage('Terraform dev-workspace-destroy') {
                 steps {
-                    sh label: '', script: 'terraform apply -var-file=dev.tfvars --auto-approve'
+                    sh label: '', script: 'terraform destroy -var-file=dev.tfvars --auto-approve'
 
                 }
             }
