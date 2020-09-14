@@ -14,25 +14,25 @@ pipeline {
             }
             stage('Terraform dev-workspace') {
                 steps {
-                    sh label: '', returnStatus: true, script: 'terraform workspace new dev'
+                    sh label: '', returnStatus: true, script: 'terraform workspace delete dev'
 
                 }
             }
             stage('Terraform dev-workspace-apply') {
                 steps {
-                    sh label: '', script: 'terraform apply -var-file=dev.tfvars --auto-approve'
+                    sh label: '', script: 'terraform destroy -var-file=dev.tfvars --auto-approve'
 
                 }
             }
              stage('Terraform prod-workspace') {
                 steps {
-                    sh label: '', returnStatus: true, script: 'terraform workspace new prod'
+                    sh label: '', returnStatus: true, script: 'terraform workspace delete prod'
 
                 }
             }
             stage('Terraform prod-workspace-apply') {
                 steps {
-                    sh label: '', script: 'terraform apply -var-file=prod.tfvars --auto-approve'
+                    sh label: '', script: 'terraform destroy -var-file=prod.tfvars --auto-approve'
 
                 }
             }
@@ -48,5 +48,5 @@ pipeline {
     }
 
 def CreateS3Bucket(bucketName) {
-    sh returnStatus: true, script: "aws s3 mb s3://${bucketName} --region us-west-1"
+    sh returnStatus: true, script: "aws s3 rb s3://${bucketName} --region us-west-1"
 }
