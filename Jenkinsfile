@@ -27,13 +27,13 @@ pipeline {
             stage('Creating-S3-Bucket') {
                 steps {
                     script {
-                        creates3bucket('prasad-0607')
+                        CreateS3Bucket('prasad-0607')
                     }
                     }
             }
         }
     }
 
-def creates3bucket(bucketName){
+def CreateS3Bucket(bucketName){
     sh returnStatus: true, script: "aws s3 mb ${bucketName} --region=us-east-1"
 }
