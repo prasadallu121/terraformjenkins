@@ -23,7 +23,7 @@ resource "aws_subnet" "red_pub_sn" {
   cidr_block = "${cidrsubnet(var.red_cidr, 8, count.index + 1)}"
 
   tags = {
-    Name = "Red-Public-SN - 00${count.index + 1} - ${terraform.workspace}"
+    Name = "PublicSN-00${count.index + 1}-${terraform.workspace}"
     Environment = "${terraform.workspace}"
   }
   }
